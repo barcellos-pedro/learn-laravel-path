@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Demo</title>
+    <title>Demo - Books</title>
     <style>
         body {
             display: grid;
@@ -14,20 +14,17 @@
         }
     </style>
 </head>
-<body >
-    <h1>Demo</h1>
+<body>
+<?php
+$name = "Dark Matter";
+$read = true;
 
-    <?php 
-        $greeting = "hello";
-        $name = 'pedro';
-        $age = 26;
-        
-        echo $greeting . " " . $name;
-        
-        echo "<br>";
-
-        // double quote to evaluate variable inside string
-        echo "$greeting $name ($age years old)!";
-    ?>
+if ($read) {
+    $message = "You have read $name";
+} else {
+    $message = "You have not read $name";
+}
+?>
+<p><?= $message ?></p>
 </body>
 </html>
