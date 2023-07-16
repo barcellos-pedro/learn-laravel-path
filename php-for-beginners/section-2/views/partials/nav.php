@@ -9,8 +9,8 @@
                     <div class="ml-10 flex items-baseline space-x-4">
                         <!-- Current: "bg-gray-900 text-white", Default: "" -->
                         <a href="/" class="<?= activeLink("/") ?> rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Home</a>
-                        <a href="/about.php" class="<?= activeLink("/about.php") ?> hover:text-white rounded-md px-3 py-2 text-sm font-medium">About</a>
-                        <a href="/contact.php" class="<?= activeLink("/contact.php") ?> hover:text-white rounded-md px-3 py-2 text-sm font-medium">Contact</a>
+                        <a href="/about" class="<?= activeLink("/about") ?> hover:text-white rounded-md px-3 py-2 text-sm font-medium">About</a>
+                        <a href="/contact" class="<?= activeLink("/contact") ?> hover:text-white rounded-md px-3 py-2 text-sm font-medium">Contact</a>
                     </div>
                 </div>
             </div>
@@ -96,8 +96,8 @@
             </div>
             <div class="mt-3 space-y-1 px-2">
                 <a href="/" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Home</a>
-                <a href="/about.php" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">About</a>
-                <a href="/contact.php" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Contact</a>
+                <a href="/about" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">About</a>
+                <a href="/contact" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Contact</a>
             </div>
         </div>
     </div>
