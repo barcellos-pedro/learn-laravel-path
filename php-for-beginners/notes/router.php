@@ -21,10 +21,10 @@ function routeToController($uri, $routes)
 }
 
 /** Return not found page and send status code of 404 */
-function abort($code = 404)
+function abort($code = Response::NOT_FOUND)
 {
     http_response_code($code);
-    require "views/404.php";
+    require "views/$code.php";
 }
 
 routeToController($uri, $routes);
