@@ -20,7 +20,7 @@ function routeToController($uri, $routes)
     }
 }
 
-/** Return not found page and send status code of 404 */
+/** Return not found page and send a status code */
 function abort($code = Response::NOT_FOUND)
 {
     http_response_code($code);

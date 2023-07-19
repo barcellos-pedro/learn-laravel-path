@@ -21,11 +21,13 @@ class Database
         return $this;
     }
 
+    /** Returns an array of results */
     public function get()
     {
         return $this->statement->fetchAll();
     }
 
+    /** Returns a single result */
     public function find()
     {
         return $this->statement->fetch();
