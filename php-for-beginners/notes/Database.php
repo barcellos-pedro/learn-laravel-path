@@ -33,6 +33,7 @@ class Database
         return $this->statement->fetch();
     }
 
+    /** Returns a single result or renders (404) Not Found page */
     public function findOrFail()
     {
         $result = $this->find();
