@@ -26,3 +26,9 @@ function authorize($condition, $status = Response::FORBIDDEN)
         abort($status);
     }
 }
+
+/** Check request method: e.g POST|GET */
+function checkRequestMethod($type)
+{
+    return $_SERVER['REQUEST_METHOD'] === $type;
+}

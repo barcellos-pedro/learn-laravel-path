@@ -4,6 +4,10 @@
 
 <main>
     <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+        <a href="/notes/create" class="text-blue-500 hover:underline">
+            Create note
+        </a>
+        <hr class="my-4">
         <ul>
             <?php foreach ($notes as $note) : ?>
                 <li>
@@ -12,16 +16,8 @@
                     </a>
                 </li>
             <?php endforeach; ?>
-
-            <hr class="my-4">
-
-            <a href="/notes/create" class="text-blue-500 hover:underline">
-                Create note
-            </a>
         </ul>
     </div>
-
-
 </main>
 
 <?php require('partials/footer.php'); ?>
