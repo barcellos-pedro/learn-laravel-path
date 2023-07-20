@@ -25,4 +25,4 @@ if (checkRequestMethod(Request::POST)) {
     }
 }
 
-require "views/note-create.view.php";
+require "views/notes/create.view.php";
