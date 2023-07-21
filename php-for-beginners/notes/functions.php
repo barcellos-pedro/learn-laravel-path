@@ -20,6 +20,7 @@ function activeLink($value)
     return "text-gray-300 hover:bg-gray-700 hover:text-white";
 }
 
+/** Check if condition is true, otherwise renders 403 page */
 function authorize($condition, $status = Response::FORBIDDEN)
 {
     if (!$condition) {
@@ -31,4 +32,17 @@ function authorize($condition, $status = Response::FORBIDDEN)
 function checkRequestMethod($type)
 {
     return $_SERVER['REQUEST_METHOD'] === $type;
+}
+
+/** Returns path to the file relative to the root directory */
+function base_path($path)
+{
+    return BASE_PATH . $path;
+}
+
+/** Returns view file relative to the root directory */
+function view($path, $data = [])
+{
+    extract($data);
+    require base_path("views/$path");
 }
