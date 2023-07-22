@@ -13,10 +13,10 @@ function routeToController($uri, $routes)
 function abort($code = Response::NOT_FOUND)
 {
     http_response_code($code);
-    require "views/$code.php";
+    require base_path("views/$code.php");
 }
 
-$routes = require('routes.php');
+$routes = require base_path('routes.php');
 $parsedUri = parse_url($_SERVER["REQUEST_URI"]); // splits string ["path" => ..., "query" => ...]
 $uri = $parsedUri["path"];
 
