@@ -11,9 +11,10 @@ function dd($value)
     die();
 }
 
-function activeLink($value)
+/** Chech if the path is current route and apply style classes */
+function activeLink($path)
 {
-    $isActive = $_SERVER["REQUEST_URI"] === $value;
+    $isActive = $_SERVER["REQUEST_URI"] === $path;
 
     if ($isActive) {
         return "bg-gray-900 text-white";
