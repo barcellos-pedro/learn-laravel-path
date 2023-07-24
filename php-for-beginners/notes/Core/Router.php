@@ -40,7 +40,10 @@ class Router
         $this->addRoute($uri, $controller, Request::PUT);
     }
 
-    /** Route to desired path and method */
+    /**
+     * Check if there is an existing route that matches current uri and method.
+     * If so, route to the desired path and its corresponding method
+     * */
     public function route($uri, $method)
     {
         foreach ($this->routes as $route) {

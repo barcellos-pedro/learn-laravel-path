@@ -67,6 +67,7 @@ function view($path, $data = [])
 function init_autoload()
 {
     spl_autoload_register(function ($class) {
+        // replace backslash from class value | '<Namespace>\<Class>'
         $class =  str_replace("\\", DIRECTORY_SEPARATOR, $class);
         require base_path("{$class}.php");
     });
