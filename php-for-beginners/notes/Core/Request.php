@@ -4,6 +4,9 @@ namespace Core;
 
 class Request
 {
-    const POST = 'POST';
     const GET = 'GET';
+    const POST = 'POST';
+    const DELETE = 'DELETE';
+    const PATCH = 'PATCH';
+    const PUT = 'PUT';
 }

@@ -7,6 +7,7 @@
     <p class="my-4"><?= htmlspecialchars($note["body"]) ?></p>
     <!-- POST to the current URL /note?id=<id> -->
     <form method="POST" name="deleteNote">
+        <input type="hidden" name="_method" aria-hidden="true" value="DELETE">
         <input type="hidden" name="id" aria-hidden="true" value="<?= $note['id'] ?>">
         <button type="submit" class="bg-red-500 py-2 px-4 font-semibold text-white text-sm rounded hover:bg-red-600">Delete</button>
     </form>
