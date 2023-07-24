@@ -1,6 +1,6 @@
 <?php
 $heading = "404 - Page not found";
-require "partials/head.php";
+require base_path("views/partials/head.php");
 ?>
 
 <main class="h-screen flex flex-col items-center justify-center">
@@ -10,4 +10,4 @@ require "partials/head.php";
     </a>
 </main>
 
-<?php require('views/partials/footer.php'); ?>
+<?php require base_path('views/partials/footer.php'); ?>

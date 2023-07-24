@@ -28,7 +28,10 @@ function authorize($condition, $status = Response::FORBIDDEN)
 {
     if (!$condition) {
         abort($status);
+        return false;
     }
+
+    return true;
 }
 
 /** Check request method: e.g POST|GET */

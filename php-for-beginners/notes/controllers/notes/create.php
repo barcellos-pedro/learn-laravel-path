@@ -23,6 +23,9 @@ if (checkRequestMethod(Request::POST)) {
             'body' => $content,
             'user_id' => $currentUser
         ]);
+
+        header('location: /notes'); // redirect
+        exit();
     }
 }
 
