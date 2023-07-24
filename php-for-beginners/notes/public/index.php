@@ -1,12 +1,17 @@
 <?php
 
+use Core\App;
+use Core\Router;
+
 const BASE_PATH = __DIR__ . "/../";
 
 require BASE_PATH . "Core/functions.php";
 
 init_autoload();
 
-$router = new \Core\Router();
+require base_path('bootstrap.php');
+
+$router = App::resolve(Router::class);
 
 require base_path('routes.php');
 
