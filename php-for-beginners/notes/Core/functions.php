@@ -2,11 +2,13 @@
 
 use Core\Response;
 
-/** Dump and die */
-function dd($value)
+/** Dump values and die */
+function dd(...$values)
 {
     echo "<pre>";
-    var_dump($value);
+    foreach ($values as $value) {
+        var_dump($value);
+    }
     echo "</pre>";
     die();
 }
