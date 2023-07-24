@@ -18,11 +18,12 @@ if (checkRequestMethod(Request::POST)) {
     $db->query("DELETE FROM notes WHERE id = :id", [
         'id' => $_POST['id']
     ]);
+
     header('location: /notes'); // redirect
     exit();
-} else {
-    view("notes/show.view.php", [
-        'heading' => 'Note',
-        'note' => $note
-    ]);
 }
+
+view("notes/show.view.php", [
+    'heading' => 'Note',
+    'note' => $note
+]);

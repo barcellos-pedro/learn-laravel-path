@@ -10,7 +10,6 @@ $db = new Database($config['database']);
 $errors = [];
 
 if (checkRequestMethod(Request::POST)) {
-    dd($_POST);
     $content = $_POST['body'];
 
     if (!Validator::string($content, 1, 255)) {
