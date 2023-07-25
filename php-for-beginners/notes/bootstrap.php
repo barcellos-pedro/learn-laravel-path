@@ -1,5 +1,7 @@
 <?php
 
+/** App Service Container */
+
 use Core\Container;
 use Core\Database;
 use Core\Router;
