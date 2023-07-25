@@ -2,52 +2,71 @@
 
 namespace Core;
 
+use Core\Middleware\Middleware;
+
 class Router
 {
     protected $routes = [];
 
+    /**
+     * Add route to list of routes
+     * All routes start with a null middleware
+     */
     public function addRoute($uri, $controller, $method)
     {
         $this->routes[] = [
             'uri' => $uri,
             'controller' => $controller,
-            'method' => $method
+            'method' => $method,
+            'middleware' => null
         ];
+
+        return $this;
     }
 
     public function get($uri, $controller)
     {
-        $this->addRoute($uri, $controller, Request::GET);
+        return $this->addRoute($uri, $controller, Request::GET);
     }
 
     public function post($uri, $controller)
     {
-        $this->addRoute($uri, $controller, Request::POST);
+        return $this->addRoute($uri, $controller, Request::POST);
     }
 
     public function delete($uri, $controller)
     {
-        $this->addRoute($uri, $controller, Request::DELETE);
+        return $this->addRoute($uri, $controller, Request::DELETE);
     }
 
     public function patch($uri, $controller)
     {
-        $this->addRoute($uri, $controller, Request::PATCH);
+        return $this->addRoute($uri, $controller, Request::PATCH);
     }
 
     public function put($uri, $controller)
     {
-        $this->addRoute($uri, $controller, Request::PUT);
+        return $this->addRoute($uri, $controller, Request::PUT);
+    }
+
+    /** Add middleware attribute to last added route */
+    public function only($key)
+    {
+        $lastRoute = array_key_last($this->routes);
+        $this->routes[$lastRoute]['middleware'] = $key;
+        return $this;
     }
 
     /**
      * Check if there is an existing route that matches current uri and method.
-     * If so, route to the desired path and its corresponding method
+     * Check middleware handle if the route has one
+     * And then route to the requested uri with its corresponding method
      * */
     public function route($uri, $method)
     {
         foreach ($this->routes as $route) {
             if ($route['uri'] === $uri && $route['method'] === strtoupper($method)) {
+                Middleware::resolve($route['middleware']);
                 require base_path($route['controller']);
                 exit();
             }
