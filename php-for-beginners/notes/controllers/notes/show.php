@@ -15,5 +15,6 @@ authorize($note['user_id'] === $currentUserId);
 
 view("notes/show.view.php", [
     'heading' => 'Note',
-    'note' => $note
+    'note' => $note,
+    'currentUserId' => $currentUserId
 ]);
