@@ -63,7 +63,10 @@ function view($path, $data = [])
     require base_path("views/$path");
 }
 
-/** Autoload classes as they are needed */
+/**
+ * Autoload \Core classes as they are needed
+ * without the need to "require()"
+ */
 function init_autoload()
 {
     spl_autoload_register(function ($class) {

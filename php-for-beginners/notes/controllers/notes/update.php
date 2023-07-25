@@ -22,11 +22,12 @@ if (!Validator::string($content, 1, 255)) {
 }
 
 if (!empty($errors)) {
-    return view("notes/edit.view.php", [
+    view("notes/edit.view.php", [
         'heading' => "Edit note",
         'note' => $note,
         'errors' => $errors
     ]);
+    exit();
 }
 
 $db->query("UPDATE notes SET body = :body WHERE id = :id", [

@@ -14,10 +14,11 @@ if (!Validator::string($content, 1, 255)) {
 }
 
 if (!empty($errors)) {
-    return view("notes/create.view.php", [
+    view("notes/create.view.php", [
         'heading' => "Create note",
         'errors' => $errors
     ]);
+    exit();
 }
 
 $currentUser = 3;

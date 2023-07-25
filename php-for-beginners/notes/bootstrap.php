@@ -1,6 +1,12 @@
 <?php
 
-/** App Service Container */
+/**
+ * App Service Container
+ * 
+ * Set up class bindings to register classes that may be used later
+ * so we avoid the need to instantiate classes to use
+ * static methods from App class
+ */
 
 use Core\Container;
 use Core\Database;
@@ -16,6 +22,6 @@ App::bind('Core\Database', function () {
     return new Database($config['database']);
 });
 
-App::bind('Core\Router', function () {
+App::bind(Router::class, function () {
     return new Router();
 });
