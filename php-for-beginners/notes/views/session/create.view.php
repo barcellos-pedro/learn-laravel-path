@@ -13,7 +13,7 @@
         </div>
 
         <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form class="space-y-6" method="POST" action="/register">
+            <form class="space-y-6" method="POST" action="/session">
                 <div>
                     <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
                     <div class="mt-2">
@@ -32,10 +32,18 @@
                     </div>
                 </div>
 
-                <?php if (isset($errors['login'])) : ?>
+                <?php if (isset($errors['email'])) : ?>
                     <ul class="list-disc pl-4">
                         <li class="text-red-500 font-bold">
                             <?= $errors['email'] ?>
+                        </li>
+                    </ul>
+                <?php endif; ?>
+
+                <?php if (isset($errors['password'])) : ?>
+                    <ul class="list-disc pl-4">
+                        <li class="text-red-500 font-bold">
+                            <?= $errors['password'] ?>
                         </li>
                     </ul>
                 <?php endif; ?>

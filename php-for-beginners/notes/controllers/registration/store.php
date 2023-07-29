@@ -46,9 +46,7 @@ $db->query('INSERT INTO users(email, password) VALUES(:email, :password)', [
 ]);
 
 // mark that the user has logged in
-$_SESSION['user'] = [
-    'email' => $email
-];
+login(['email' => $email]);
 
 header('location: /');
 exit();

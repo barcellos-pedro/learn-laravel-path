@@ -71,7 +71,31 @@ function init_autoload()
 {
     spl_autoload_register(function ($class) {
         // replace backslash from class value | '<Namespace>\<Class>'
-        $class =  str_replace("\\", DIRECTORY_SEPARATOR, $class);
+        $class = str_replace("\\", DIRECTORY_SEPARATOR, $class);
         require base_path("{$class}.php");
     });
+}
+
+/** Register user info in cookie */
+function login($user)
+{
+    $_SESSION['user'] = [
+        'email' => $user['email']
+    ];
+
+    // regenerate session id, for security best practices
+    session_regenerate_id(true);
+}
+
+/** Handle user session and log out */
+function logout()
+{
+    $_SESSION = []; // clear super global
+    session_destroy(); // destroy session file
+
+    $params = session_get_cookie_params();
+    $expires = time() - 3600; // 1 hour ago
+
+    // expire and delete cookie
+    setcookie('PHPSESSID', '', $expires, $params['path'], $params['domain'], $params['secure'], $params['httponly']);
 }
