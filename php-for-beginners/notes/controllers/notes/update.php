@@ -6,7 +6,7 @@ use Core\Validator;
 
 $db = App::resolve(Database::class);
 
-$cuurentUserId = 3;
+$currentUserId = $_SESSION['user']['id'];
 $id = $_POST['id'];
 $content = $_POST['body'];
 $errors = [];
@@ -15,7 +15,7 @@ $note = $db->query("SELECT * FROM notes WHERE id = :id", [
     'id' => $id
 ])->findOrFail();
 
-authorize($note['user_id'] === $cuurentUserId);
+authorize($note['user_id'] === $currentUserId);
 
 if (!Validator::string($content, 1, 255)) {
     $errors['body'] = "A body of no more than 255 is required";

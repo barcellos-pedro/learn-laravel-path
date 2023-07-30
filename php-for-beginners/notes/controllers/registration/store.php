@@ -39,14 +39,23 @@ if ($user) {
     exit();
 }
 
-// If not, save one to database and then log in, and redirect
+// If not, save one to database
 $db->query('INSERT INTO users(email, password) VALUES(:email, :password)', [
     'email' => $email,
     'password' => password_hash($password, PASSWORD_BCRYPT) // save hashed password
 ]);
 
-// mark that the user has logged in
-login(['email' => $email]);
+// get created user to store info into the session
+$user = $db->query('SELECT * from users WHERE email = :email', [
+    'email' => $email
+])->find();
 
+// mark that the user has logged in
+login([
+    'email' => $user['email'],
+    'id' => $user['id']
+]);
+
+// and then redirect
 header('location: /');
 exit();

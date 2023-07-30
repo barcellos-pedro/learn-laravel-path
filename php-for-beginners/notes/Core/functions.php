@@ -80,7 +80,8 @@ function init_autoload()
 function login($user)
 {
     $_SESSION['user'] = [
-        'email' => $user['email']
+        'email' => $user['email'],
+        'id' => $user['id']
     ];
 
     // regenerate session id, for security best practices
@@ -96,6 +97,6 @@ function logout()
     $params = session_get_cookie_params();
     $expires = time() - 3600; // 1 hour ago
 
-    // expire and delete cookie
+    // expire and "delete" (clear) cookie
     setcookie('PHPSESSID', '', $expires, $params['path'], $params['domain'], $params['secure'], $params['httponly']);
 }

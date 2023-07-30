@@ -35,7 +35,10 @@ $user = $db->query('SELECT * FROM users WHERE email = :email', [
 // check if there is an account for the given e-mail
 // and if provided password matches hashed password from database
 if ($user && password_verify($password, $user['password'])) {
-    login(['email' => $email]);
+    login([
+        'email' => $email,
+        'id' => $user['id']
+    ]);
     header('location: /notes');
     exit();
 }
