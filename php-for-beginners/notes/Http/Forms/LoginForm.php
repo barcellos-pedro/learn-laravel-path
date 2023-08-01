@@ -23,7 +23,15 @@ class LoginForm
         return empty($this->errors);
     }
 
-    public function errors(){
+    /** Get errors array */
+    public function errors()
+    {
         return $this->errors;
+    }
+
+    /** Add a new error with message to the errors array */
+    public function error($field, $message)
+    {
+        $this->errors[$field] = $message;
     }
 }
