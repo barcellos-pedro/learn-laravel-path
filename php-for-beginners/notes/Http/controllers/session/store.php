@@ -2,6 +2,7 @@
 
 use Core\Authenticator;
 use Http\Forms\LoginForm;
+use Core\Session;
 
 $email = $_POST['email'];
 $password = $_POST['password'];
@@ -17,9 +18,6 @@ if ($form->validate($email, $password)) {
     $form->error('email', 'Invalid credentials');
 }
 
-// if there are errors, show login page with errors
-view('session/create.view.php', [
-    'heading' => 'Log in',
-    'errors' => $form->errors()
-]);
-exit();
+Session::flash('errors', $form->errors());
+
+return redirect('/login');

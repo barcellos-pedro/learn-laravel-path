@@ -2,6 +2,7 @@
 
 use Core\App;
 use Core\Router;
+use Core\Session;
 
 session_start();
 
@@ -23,3 +24,5 @@ $uri = $parsedUri["path"];
 $method = $_POST['_method'] ?? $_SERVER['REQUEST_METHOD'];
 
 $router->route($uri, $method);
+
+Session::unFlash();
