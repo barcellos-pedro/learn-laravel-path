@@ -15,8 +15,8 @@ class Authenticator
         // and if provided password matches hashed password from database
         if ($user && password_verify($password, $user['password'])) {
             $this->login([
-                'email' => $email,
-                'id' => $user['id']
+                'id' => $user['id'],
+                'email' => $email
             ]);
 
             return true;
@@ -28,10 +28,10 @@ class Authenticator
     /** Register user info in cookie */
     public function login($user)
     {
-        $_SESSION['user'] = [
-            'email' => $user['email'],
-            'id' => $user['id']
-        ];
+        Session::put('user', [
+            'id' => $user['id'],
+            'email' => $user['email']
+        ]);
 
         // regenerate session id, for security best practices
         session_regenerate_id(true);

@@ -1,6 +1,7 @@
 <?php
 
 use Core\Response;
+use Core\Session;
 
 /** Dump values and die */
 function dd(...$values)
@@ -81,4 +82,10 @@ function redirect($path)
 {
     header("location: {$path}");
     exit();
+}
+
+/** Get old Form Data from Session flash value */
+function old($key, $default = '')
+{
+    return Session::get('old')[$key] ?? $default;
 }
