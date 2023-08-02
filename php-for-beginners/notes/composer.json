@@ -1,0 +1,16 @@
+{
+    "name": "pedro/notes",
+    "authors": [
+        {
+            "name": "Pedro Reis",
+            "email": "pedrobarcellosdosreis@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Core\\": "Core/",
+            "Http\\": "Http/"
+        }
+    }
+}

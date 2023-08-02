@@ -66,15 +66,11 @@ function view($path, $data = [])
 
 /**
  * Autoload \Core classes as they are needed
- * without the need to "require()"
+ * without the need to "require()" manually
  */
 function init_autoload()
 {
-    spl_autoload_register(function ($class) {
-        // replace backslash from class value | '<Namespace>\<Class>'
-        $class = str_replace("\\", DIRECTORY_SEPARATOR, $class);
-        require base_path("{$class}.php");
-    });
+    require base_path("vendor/autoload.php");
 }
 
 /** Redirect to desired path */
