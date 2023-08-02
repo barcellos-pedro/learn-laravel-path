@@ -23,6 +23,9 @@ class Container
         }
 
         $resolver = $this->bindings[$key];
-        return call_user_func($resolver);
+
+        // return call_user_func($resolver);
+
+        return $resolver(); // direct way,without built-in function
     }
 }
