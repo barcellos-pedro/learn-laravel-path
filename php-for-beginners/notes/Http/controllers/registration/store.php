@@ -3,6 +3,7 @@
 use Core\Validator;
 use Core\App;
 use Core\Database;
+use Core\Session;
 
 $email = $_POST['email'];
 $password = $_POST['password'];
@@ -35,8 +36,7 @@ $user = $db->query('SELECT * from users WHERE email = :email', [
 
 // if yes, redirect to login page
 if ($user) {
-    header('location: /login');
-    exit();
+    return redirect('/login');
 }
 
 // If not, save one to database
@@ -51,11 +51,10 @@ $user = $db->query('SELECT * from users WHERE email = :email', [
 ])->find();
 
 // mark that the user has logged in
-login([
+Session::put('user', [
     'email' => $user['email'],
     'id' => $user['id']
 ]);
 
 // and then redirect
-header('location: /');
-exit();
+redirect('/');

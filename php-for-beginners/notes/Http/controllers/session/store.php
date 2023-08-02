@@ -10,7 +10,7 @@ $form = LoginForm::validate($attributes = [
     'password' => $_POST['password']
 ]);
 
-$signedIn = (new Authenticator)->attempt(
+$signedIn = Authenticator::attempt(
     $attributes['email'], $attributes['password']
 );
 

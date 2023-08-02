@@ -2,5 +2,5 @@
 
 use Core\Authenticator;
 
-(new Authenticator)->logout();
+Authenticator::logout();
 redirect('/');

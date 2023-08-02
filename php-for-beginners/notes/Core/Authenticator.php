@@ -4,7 +4,7 @@ namespace Core;
 
 class Authenticator
 {
-    public function attempt($email, $password)
+    public static function attempt($email, $password)
     {
         $user = App::resolve(Database::class)
             ->query('SELECT * FROM users WHERE email = :email', [
@@ -14,7 +14,7 @@ class Authenticator
         // check if there is an account for the given e-mail
         // and if provided password matches hashed password from database
         if ($user && password_verify($password, $user['password'])) {
-            $this->login([
+            static::login([
                 'id' => $user['id'],
                 'email' => $email
             ]);
@@ -26,7 +26,7 @@ class Authenticator
     }
 
     /** Register user info in cookie */
-    public function login($user)
+    private static function login($user)
     {
         Session::put('user', [
             'id' => $user['id'],
@@ -38,9 +38,8 @@ class Authenticator
     }
 
     /** Handle user session and log out */
-    public function logout()
+    public static function logout()
     {
         Session::destroy();
     }
-
 }
