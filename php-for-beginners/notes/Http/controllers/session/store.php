@@ -2,26 +2,23 @@
 
 use Core\Authenticator;
 use Http\Forms\LoginForm;
-use Core\Session;
 
-$email = $_POST['email'];
-$password = $_POST['password'];
-
-$form = new LoginForm();
-
-// if validation is ok, try to authenticate user
-if ($form->validate($email, $password)) {
-    if ((new Authenticator)->attempt($email, $password)) {
-        redirect('/notes');
-    }
-
-    $form->error('email', 'Invalid credentials');
-}
-
-Session::flash('errors', $form->errors());
-
-Session::flash('old', [
-    'email' => $email
+// try to validate form values, might throw an error
+// catch on index, when routing occurs
+$form = LoginForm::validate($attributes = [
+    'email' => $_POST['email'],
+    'password' => $_POST['password']
 ]);
 
-return redirect('/login');
+$signedIn = (new Authenticator)->attempt(
+    $attributes['email'], $attributes['password']
+);
+
+// if form is valid, try to authenticate user
+if (!$signedIn) {
+    $form->error(
+        'email', 'Invalid credentials'
+    )->throw();
+}
+
+redirect('/');

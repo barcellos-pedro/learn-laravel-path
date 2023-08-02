@@ -74,6 +74,12 @@ class Router
         $this->abort();
     }
 
+    /** Get previous URL */
+    public function previousUrl()
+    {
+        return $_SERVER['HTTP_REFERER'];
+    }
+
     /** Return not found page and send a status code */
     protected function abort($code = Response::NOT_FOUND)
     {

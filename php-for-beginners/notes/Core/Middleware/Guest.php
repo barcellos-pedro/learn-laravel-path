@@ -7,7 +7,7 @@ class Guest
     /** Handle check for guests only */
     public function handle()
     {
-        if ($_SESSION['user']) {
+        if ($_SESSION['user'] ?? false) {
             redirect('/');
         }
     }

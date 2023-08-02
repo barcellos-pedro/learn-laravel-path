@@ -1,8 +1,8 @@
 <?php
 
-use Core\App;
 use Core\Router;
 use Core\Session;
+use Core\ValidationException;
 
 session_start();
 
@@ -14,7 +14,7 @@ init_autoload();
 
 require base_path('bootstrap.php');
 
-$router = App::resolve(Router::class);
+$router = new Router();
 
 require base_path('routes.php');
 
@@ -23,6 +23,13 @@ $uri = $parsedUri["path"];
 // give preference to hidden field from post request to override GET/POST
 $method = $_POST['_method'] ?? $_SERVER['REQUEST_METHOD'];
 
-$router->route($uri, $method);
+// when routing, route controller might throw an error
+try {
+    $router->route($uri, $method);
+} catch (ValidationException $exception) {
+    Session::flash('errors', $exception->errors);
+    Session::flash('old', $exception->old);
+    return redirect($router->previousUrl());
+}
 
 Session::unFlash();
