@@ -9,12 +9,13 @@
 </head>
 
 <body>
-    <article>
-        <h1><?= $post->title; ?></h1>
-        <p><?= $post->body; ?></p>
-    </article>
+<article>
+    <h1>{{ $post->title }}</h1>
+    <!-- Do not scape the content -->
+    <p>{!! $post->body !!}</p>
+</article>
 
-    <a href="/">Go back</a>
+<a href="/">Go back</a>
 </body>
 
 </html>
