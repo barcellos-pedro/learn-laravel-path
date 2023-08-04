@@ -18,17 +18,14 @@ Route::get('/', function () {
 });
 
 Route::get('/post/{post}', function ($slug) {
-    $path = __DIR__ . "/../resources/posts/{$slug}.html";
-
-    if (!file_exists($path)) {
-        // abort(404);
+    if (!file_exists($path = __DIR__ . "/../resources/posts/{$slug}.html")) {
         return redirect('/');
     }
 
-    $post = file_get_contents($path);
+    $post = cache()->remember("posts.{$slug}", 1200, fn () => file_get_contents($path));
 
-    return view('post', [
-        'post' => $post
-    ]);
-})->where('post', '[A-z_\-]+'); // using regex
+    return view('post', ['post' => $post]);
+})->where('post', '[A-z_\-]+');
+
+// strict path params using regex (only text, including '_' and '-');
 //->whereAlpha('post');
