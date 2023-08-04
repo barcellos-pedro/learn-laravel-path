@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
 use Spatie\YamlFrontMatter\Document;
 use Spatie\YamlFrontMatter\YamlFrontMatter;
@@ -18,8 +20,11 @@ class Post
     {
     }
 
-    /** Instantiate a new Post from a Spatie\YamlFrontMatter\Document */
-    public static function fromDocument(Document $document)
+    /** Instantiate a new Post from a Spatie\YamlFrontMatter\Document
+     * @param Document $document
+     * @return Post
+     */
+    public static function fromDocument(Document $document): static
     {
         $title = $document->matter('title');
         $slug = $document->matter('slug');
@@ -30,7 +35,7 @@ class Post
     }
 
     /** Get all posts */
-    public static function all()
+    public static function all(): Collection
     {
         return cache()->rememberForever('posts.all', function () {
             return collect(File::files(resource_path("posts")))
@@ -41,8 +46,20 @@ class Post
     }
 
     /** Find a post by its slug */
-    public static function find($slug)
+    public static function find($slug): Post|null
     {
         return static::all()->firstWhere('slug', $slug);
+    }
+
+    /** Find a post by its slug, or renders 404 page */
+    public static function findOrFail($slug): Post
+    {
+        $post = static::find($slug);
+
+        if (!$post) {
+            throw new ModelNotFoundException();
+        }
+
+        return $post;
     }
 }
