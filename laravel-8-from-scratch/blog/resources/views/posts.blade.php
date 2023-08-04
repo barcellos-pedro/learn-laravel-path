@@ -9,47 +9,11 @@
 </head>
 
 <body>
-    <article>
-        <h1>
-            <a href="/post/my-first-post">My first post</a>
-        </h1>
-        <p>
-            lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet
-            lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet
-            lorem ipsum dolor sit amet lorem ipsum dolor sit amet
-            lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet
-            lorem ipsum dolor sit amet lorem ipsum dolor sit amet
-            lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet
-        </p>
-    </article>
-
-    <article>
-        <h1>
-            <a href="/post/my-second-post">My second post</a>
-        </h1>
-        <p>
-            lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet
-            lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet
-            lorem ipsum dolor sit amet lorem ipsum dolor sit amet
-            lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet
-            lorem ipsum dolor sit amet lorem ipsum dolor sit amet
-            lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet
-        </p>
-    </article>
-
-    <article>
-        <h1>
-            <a href="/post/my-third-post">My third post</a>
-        </h1>
-        <p>
-            lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet
-            lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet
-            lorem ipsum dolor sit amet lorem ipsum dolor sit amet
-            lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet
-            lorem ipsum dolor sit amet lorem ipsum dolor sit amet
-            lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet
-        </p>
-    </article>
+    <?php foreach ($posts as $post) : ?>
+        <article>
+            <?= $post ?>
+        </article>
+    <?php endforeach; ?>
 </body>
 
 </html>
