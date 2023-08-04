@@ -29,18 +29,18 @@ class Post
         return new static($title, $slug, $excerpt, $date, $body);
     }
 
-    /** Get all files from posts directory */
+    /** Get all posts */
     public static function all()
     {
-        return collect(File::files(resource_path("posts")))
-            ->map(fn($file) => YamlFrontMatter::parseFile($file))
-            ->map(fn($file) => Post::fromDocument($file));
+        return cache()->rememberForever('posts.all', function () {
+            return collect(File::files(resource_path("posts")))
+                ->map(fn($file) => YamlFrontMatter::parseFile($file))
+                ->map(fn($file) => Post::fromDocument($file))
+                ->sortByDesc('date');
+        });
     }
 
-    /**
-     * Find a post by its slug, and return post's content
-     * if not found, throws ModelNotFoundException
-     */
+    /** Find a post by its slug */
     public static function find($slug)
     {
         return static::all()->firstWhere('slug', $slug);
