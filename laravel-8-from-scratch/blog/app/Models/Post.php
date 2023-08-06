@@ -20,10 +20,7 @@ class Post
     {
     }
 
-    /** Instantiate a new Post from a Spatie\YamlFrontMatter\Document
-     * @param Document $document
-     * @return Post
-     */
+    /** Instantiate a new Post from a Document */
     public static function fromDocument(Document $document): static
     {
         $title = $document->matter('title');
