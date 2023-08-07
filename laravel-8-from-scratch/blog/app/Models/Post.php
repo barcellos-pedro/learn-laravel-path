@@ -16,7 +16,8 @@ class Post extends Model
     protected $fillable = [
         'title',
         'excerpt',
-        'body'
+        'body',
+        'slug'
     ];
 
     /**
@@ -24,5 +25,18 @@ class Post extends Model
      * except those listed below.
      * Opposite of $fillable;
      */
-    protected $guarded = ['id'];
+    // protected $guarded = ['id'];
+
+    /**
+     * Set default attribute to use on route model binding
+     * replacing the default (id)
+     * 
+     * Nice to use when there is multiple routes using
+     * that key /post/{post:<field>}
+     * So we define in only one place, the model
+     */
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }

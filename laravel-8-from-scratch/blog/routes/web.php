@@ -20,8 +20,12 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/posts/{post}', function ($id) {
+/**
+ * Route model binding
+ * wildcard must be equal to variable name
+ */
+Route::get('/posts/{post}', function (Post $post) {
     return view('post', [
-        'post' => Post::findOrFail($id)
+        'post' => $post
     ]);
 });
