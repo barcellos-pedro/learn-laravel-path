@@ -7,6 +7,8 @@
     </a>
     @endforeach
 
+    <hr>
+
     <a href="/" style="font-size:1.2em">
         Go back
     </a>
