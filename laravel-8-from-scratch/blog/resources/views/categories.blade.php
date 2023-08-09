@@ -1,15 +1,20 @@
 <x-layout>
-    <h1>Categories</h1>
+    <main class="max-w-6xl mx-auto mt-6 lg:mt-20 space-y-6">
+        @if ($categories->count())
+        <h1 class="text-center text-3xl text-blue-500 font-semibold">
+            Categories
+        </h1>
 
-    @foreach ($categories as $category)
-    <a href="/categories/{{ $category->slug }}" title="See all {{ $category->name }} posts" style="display:block; margin: 1em 0; font-size:1.2em">
-        {{ $category->name }}
-    </a>
-    @endforeach
+        <div class="grid gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+            @foreach ($categories as $category)
+            <x-category-button :category="$category"></x-category-button>
+            @endforeach
+        </div>
 
-    <hr>
-
-    <a href="/" style="font-size:1.2em">
-        Go back
-    </a>
+        @else
+        <p class="text-center text-2xl">
+            No categories yet. Please check back later.
+        </p>
+        @endif
+    </main>
 </x-layout>
