@@ -31,13 +31,13 @@ Route::get('/categories', function () {
 /** Get all Posts by Category */
 Route::get('/categories/{category:slug}', function (Category $category) {
     return view('posts', [
-        'posts' => $category->posts
+        'posts' => $category->posts->load(['category', 'author'])
     ]);
 });
 
 /** Get all Posts by User */
 Route::get('/authors/{author:username}', function (User $author) {
     return view('posts', [
-        'posts' => $author->posts
+        'posts' => $author->posts->load(['category', 'author'])
     ]);
 });
