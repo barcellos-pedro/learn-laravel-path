@@ -2,12 +2,15 @@
 
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
-/** Get all posts */
+/** Get all Posts */
 Route::get('/', function () {
     return view('posts', [
-        'posts' => Post::with('category')->get()
+        'posts' => Post::latest()
+            ->with(['category', 'author'])
+            ->get()
     ]);
 });
 
@@ -25,9 +28,16 @@ Route::get('/categories', function () {
     ]);
 });
 
-/** Get all Posts by category */
+/** Get all Posts by Category */
 Route::get('/categories/{category:slug}', function (Category $category) {
     return view('posts', [
         'posts' => $category->posts
+    ]);
+});
+
+/** Get all Posts by User */
+Route::get('/authors/{author:username}', function (User $author) {
+    return view('posts', [
+        'posts' => $author->posts
     ]);
 });
