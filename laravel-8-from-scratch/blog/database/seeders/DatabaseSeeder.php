@@ -14,54 +14,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Truncate before start seeding
-        // to remove the entire table from the database
-        Post::truncate();
-        User::truncate();
-        Category::truncate();
-
-        $user = User::factory()->create();
-
-        $personal = Category::create([
-            'name' => 'Personal',
-            'slug' => 'personal'
+        // Create 1 user
+        // replacing just the name
+        $user = User::factory()->create([
+            'name' => 'Pedro Reis'
         ]);
 
-        $family = Category::create([
-            'name' => 'Family',
-            'slug' => 'family'
-        ]);
-
-        $work = Category::create([
-            'name' => 'Work',
-            'slug' => 'work'
-        ]);
-
-        Post::create([
-            'user_id' => $user->id,
-            'category_id' => $personal->id,
-            'title' => 'My Personal post',
-            'excerpt' => 'Excerpt for my post',
-            'body' => 'lorem ipsum...',
-            'slug' => 'my-personal-post',
-        ]);
-
-        Post::create([
-            'user_id' => $user->id,
-            'category_id' => $family->id,
-            'title' => 'My Family post',
-            'excerpt' => 'Excerpt for my post',
-            'body' => 'lorem ipsum...',
-            'slug' => 'my-family-post',
-        ]);
-
-        Post::create([
-            'user_id' => $user->id,
-            'category_id' => $work->id,
-            'title' => 'My Work post',
-            'excerpt' => 'Excerpt for my post',
-            'body' => 'lorem ipsum...',
-            'slug' => 'my-work-post',
+        // create 5 posts from same user
+        // and 5 different categories
+        Post::factory(5)->create([
+            'user_id' => $user->id
         ]);
     }
 }
