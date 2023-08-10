@@ -11,21 +11,21 @@ Route::get('/', function () {
         'posts' => Post::latest()->with(['category', 'author'])->get(),
         'categories' => Category::all()
     ]);
-});
+})->name('home');
 
 /** Get a Post */
 Route::get('/posts/{post:slug}', function (Post $post) {
     return view('post', [
         'post' => $post
     ]);
-});
+})->name('post');
 
 /** Get all Categories */
 Route::get('/categories', function () {
     return view('categories', [
         'categories' => Category::all()
     ]);
-});
+})->name('categories');
 
 /** Get all Posts by Category */
 Route::get('/categories/{category:slug}', function (Category $category) {
@@ -34,7 +34,7 @@ Route::get('/categories/{category:slug}', function (Category $category) {
         'categories' => Category::all(),
         'currentCategory' => $category
     ]);
-});
+})->name('category');
 
 /** Get all Posts by User */
 Route::get('/authors/{author:username}', function (User $author) {
@@ -42,4 +42,4 @@ Route::get('/authors/{author:username}', function (User $author) {
         'posts' => $author->posts->load(['category', 'author']),
         'categories' => Category::all()
     ]);
-});
+})->name('author');
