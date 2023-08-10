@@ -1,31 +1,15 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use App\Models\Category;
-use App\Models\Post;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /** Get all Posts */
-Route::get('/', function () {
-    $posts = Post::latest()->with(['category', 'author']);
-
-    if (request('search')) {
-        $posts->where('title', 'like', '%' . request('search') . '%')
-            ->orWhere('body', 'like', '%' . request('search') . '%');
-    }
-
-    return view('posts', [
-        'posts' => $posts->get(),
-        'categories' => Category::all()
-    ]);
-})->name('home');
+Route::get('/', [PostController::class, 'index'])->name('home');
 
 /** Get a Post */
-Route::get('/posts/{post:slug}', function (Post $post) {
-    return view('post', [
-        'post' => $post
-    ]);
-})->name('post');
+Route::get('/posts/{post:slug}', [PostController::class, 'show'])->name('post');
 
 /** Get all Categories */
 Route::get('/categories', function () {

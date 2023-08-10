@@ -18,6 +18,21 @@ class Post extends Model
         'user_id',
     ];
 
+    /**
+     * Activated when using filter() on Model
+     * First argument is passed automatically
+     * by Laravel query builder
+     */
+    public function scopeFilter($query, array $filters)
+    {
+        if ($filters['search'] ?? false) {
+            $search = '%' . $filters['search'] . '%';
+
+            $query->where('title', 'like', $search)
+                ->orWhere('body', 'like', $search);
+        }
+    }
+
     public function category()
     {
         return $this->belongsTo(Category::class);

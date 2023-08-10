@@ -44,5 +44,12 @@
                 <input type="search" name="search" placeholder="Find something" class="w-full bg-transparent placeholder-black font-semibold text-sm" value="{{ request('search') }}">
             </form>
         </div>
+
     </div>
+
+    @if (request('search'))
+    <p class="mt-6 text-3xl font-semibold">
+        {{ $posts->count() }} results for "{{ request('search') }}"
+    </p>
+    @endif
 </header>
