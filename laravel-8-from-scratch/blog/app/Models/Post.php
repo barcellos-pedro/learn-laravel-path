@@ -19,18 +19,39 @@ class Post extends Model
     ];
 
     /**
-     * Activated when using filter() on Model
-     * First argument is passed automatically
-     * by Laravel query builder
+     * Besides filtering per se. eg: Post::all()->filter()...
+     * eliminates the need to create an additional route
+     * to each possible filter: slug|author|category
      */
     public function scopeFilter($query, array $filters)
     {
-        if ($filters['search'] ?? false) {
-            $search = '%' . $filters['search'] . '%';
+        if (empty($filters)) return;
 
-            $query->where('title', 'like', $search)
-                ->orWhere('body', 'like', $search);
-        }
+        // filter by search text
+        $query->when(
+            $filters['search'] ?? false,
+            fn ($query, $search) =>
+            $query->where('title', 'like', "%{$search}%")
+                ->orWhere('body', 'like', "%{$search}%")
+        );
+
+        // filter by category
+        $query->when($filters['category'] ?? false, function ($query, $category) {
+            $query->whereHas(
+                'category',
+                fn ($query) =>
+                $query->where('slug', $category)
+            );
+        });
+
+        // filter by author username
+        $query->when($filters['author'] ?? false, function ($query, $author) {
+            $query->whereHas(
+                'author',
+                fn ($query) =>
+                $query->where('username', 'like', "%{$author}%")
+            );
+        });
     }
 
     public function category()

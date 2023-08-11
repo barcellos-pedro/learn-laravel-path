@@ -4,21 +4,27 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Post;
-use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+    /** Show all Posts */
     public function index()
     {
-        // get search query from form search
-        $filters = request(['search']);
+        $filters = request(['search', 'category', 'author']); // possible filters
+
+        $posts = Post::latest()
+            ->filter($filters) // uses scopeFilter on Model
+            ->with(['category', 'author'])
+            ->get();
 
         return view('posts', [
-            'posts' => Post::latest()->filter($filters)->with(['category', 'author'])->get(),
-            'categories' => Category::all()
+            'posts' => $posts,
+            'categories' => Category::all(),
+            'currentCategory' => Category::firstWhere('slug', request('category'))
         ]);
     }
 
+    /** Show single Post */
     public function show(Post $post)
     {
         return view('post', [
