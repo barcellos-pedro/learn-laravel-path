@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Models\Post;
 
 class PostController extends Controller
@@ -10,25 +9,23 @@ class PostController extends Controller
     /** Show all Posts */
     public function index()
     {
-        $filters = request(['search', 'category', 'author']); // possible filters
+        $filters = request([
+            'search',
+            'category',
+            'author'
+        ]);
 
         $posts = Post::latest()
-            ->filter($filters) // uses scopeFilter on Model
+            ->filter($filters)
             ->with(['category', 'author'])
             ->get();
 
-        return view('posts', [
-            'posts' => $posts,
-            'categories' => Category::all(),
-            'currentCategory' => Category::firstWhere('slug', request('category'))
-        ]);
+        return view('posts.index', ['posts' => $posts]);
     }
 
     /** Show single Post */
     public function show(Post $post)
     {
-        return view('post', [
-            'post' => $post
-        ]);
+        return view('posts.show', ['post' => $post]);
     }
 }
