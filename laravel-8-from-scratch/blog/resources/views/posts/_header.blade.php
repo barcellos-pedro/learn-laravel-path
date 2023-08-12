@@ -22,8 +22,12 @@
 
         <!-- Search -->
         <div class="relative flex lg:inline-flex items-center bg-gray-100 rounded-xl px-3 py-2">
-            <form method="GET" class="w-full">
+            <form method="GET" action="/" class="w-full">
                 <input type="search" name="search" placeholder="Find something" class="w-full bg-transparent placeholder-black font-semibold text-sm" value="{{ request('search') }}">
+
+                @if (request('category'))
+                <input type="hidden" name="category" aria-hidden="true" value="{{ request('category') }}">
+                @endif
             </form>
         </div>
 
