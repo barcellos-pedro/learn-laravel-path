@@ -25,9 +25,11 @@ class Post extends Model
         // filter by search text
         $query->when(
             $filters['search'] ?? false,
-            fn ($query, $search) => $query
-                ->where('title', 'like', "%{$search}%")
-                ->orWhere('body', 'like', "%{$search}%")
+            fn ($query, $search) => $query->where(
+                fn ($query) => $query
+                    ->where('title', 'like', "%{$search}%")
+                    ->orWhere('body', 'like', "%{$search}%")
+            )
         );
 
         // filter by category
