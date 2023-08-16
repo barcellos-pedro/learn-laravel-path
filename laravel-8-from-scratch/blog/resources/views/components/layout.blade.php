@@ -56,6 +56,9 @@
             </div>
         </footer>
     </section>
+
+    <!-- Flash messages -->
+    <x-flash />
 </body>
 
 </html>
