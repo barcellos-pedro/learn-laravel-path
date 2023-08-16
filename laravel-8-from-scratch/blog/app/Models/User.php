@@ -44,15 +44,6 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    /**
-     * Mutator to mutate the value before it is saved
-     * In this case, hash the password attribute
-     * when setting the password value
-     * $user->password = 'some-value';
-     * 
-     * We can create an Accessor, to get a value
-     * following the same fuction declaration
-     * */
     public function setPasswordAttribute($password)
     {
         $this->attributes['password'] = bcrypt($password);
