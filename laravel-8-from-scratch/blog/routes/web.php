@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\SessionsController;
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 
@@ -19,5 +20,9 @@ Route::get('/categories', function () {
 })->name('categories');
 
 /** Register (Sign up) */
-Route::get('/register', [RegisterController::class, 'create'])->name('register');
-Route::post('/register', [RegisterController::class, 'store']);
+Route::get('/register', [RegisterController::class, 'create'])->middleware('guest')->name('register');
+
+Route::post('/register', [RegisterController::class, 'store'])->middleware('guest');
+
+/** Sessions (log in & log out) */
+Route::post('/logout', [SessionsController::class, 'destroy'])->middleware('auth');
