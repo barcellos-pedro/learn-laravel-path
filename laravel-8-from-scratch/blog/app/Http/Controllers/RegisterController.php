@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
-    /** Return view to show register page */
+    /** Return view to register page */
     public function create()
     {
         return view('register.create');
