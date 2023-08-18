@@ -45,6 +45,13 @@
                         {{ $post->body }}
                     </div>
                 </div>
+
+                <!-- Comments section -->
+                <section class="col-span-8 col-start-5 grid grid-cols-1 gap-6">
+                    <x-post-comment />
+                    <x-post-comment />
+                    <x-post-comment />
+                </section>
             </article>
         </main>
     </section>
